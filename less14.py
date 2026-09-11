@@ -1,0 +1,37 @@
+import time
+import math
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+link = "http://suninjuly.github.io/explicit_wait2.html"
+browser = webdriver.Chrome()
+browser.get(link)
+
+price = WebDriverWait(browser, 15).until(
+    EC.text_to_be_present_in_element((By.ID, "price"),"$100")
+)
+button = browser.find_element(By.TAG_NAME, "button")
+button.click()
+
+x_web = browser.find_element(By.ID, "input_value")
+x = int(x_web.text)
+
+expr_str = "ln(abs(12*sin(x)))"
+expr_py = expr_str.replace("ln", "math.log").replace("sin", "math.sin")
+answer = str(eval(expr_py))
+
+input_field = browser.find_element(By.ID, "answer")
+input_field.send_keys(answer)
+
+button2 = browser.find_element(By.ID, "solve")
+button2.click()
+
+alert = browser.switch_to.alert
+message = alert.text
+print(message)
+alert.accept()
+
+time.sleep(2)
+browser.quit()

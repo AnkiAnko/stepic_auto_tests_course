@@ -6,3 +6,5 @@ Home tasks for Stepic course
 
 зоiбався та хочу спати
 
+таке буття таке життя
+
